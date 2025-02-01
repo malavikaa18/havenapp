@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeZone - Women's Protection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>SafeZone</h1>
+        <p>Stay Safe with Our Protection Features</p>
+        
+        <button id="emergency-call-btn">Emergency Call</button>
+        <button id="alert-btn">Emergency Alert</button>
+        
+        <div>
+            <p>Your Location: <span id="location"></span></p>
+            <button id="get-location-btn">Get Current Location</button>
+        </div>
+        
+        <p id="status"></p>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>
