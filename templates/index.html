@@ -3,25 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SafeZone - Women's Protection</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <title>SafeZone - Women's Protection</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f9fa;
+        }
+        .container {
+            width: 90%;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+        .popup button {
+            width: auto;
+            padding: 10px;
+            margin: 5px;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+    </style>
 </head>
 <body>
+
     <div class="container">
         <h1>SafeZone</h1>
         <p>Stay Safe with Our Protection Features</p>
-        
-        <button id="emergency-call-btn">Emergency Call</button>
-        <button id="alert-btn">Emergency Alert</button>
-        
-        <div>
-            <p>Your Location: <span id="location"></span></p>
-            <button id="get-location-btn">Get Current Location</button>
-        </div>
-        
-        <p id="status"></p>
+
+        <button onclick="showPopup('call-popup')">Emergency Call</button>
+        <button onclick="showPopup('alert-popup')">Emergency Alert</button>
+        <button onclick="showPopup('silent-alarm-popup')">Silent Alarm</button>
+        <button onclick="showPopup('safe-routes-popup')">Safe Routes</button>
+        <button onclick="showPopup('safety-reports-popup')">Live Safety Reports</button>
+        <button onclick="showPopup('ai-escort-popup')">AI Virtual Escort</button>
     </div>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <!-- Popups -->
+    <div id="overlay" class="overlay" onclick="closeAllPopups()"></div>
+
+    <div id="call-popup" class="popup">
+        <h3>📞 Emergency Call</h3>
+        <button onclick="alert('Calling Mom...')">Call Mom</button>
+        <button onclick="alert('Calling Dad...')">Call Dad</button>
+        <button onclick="alert('Calling Police...')">Call Police</button>
+        <button onclick="closePopup('call-popup')">Close</button>
+    </div>
+
+    <div id="alert-popup" class="popup">
+        <h3>🚨 Emergency Alert</h3>
+        <p>Help is on the way!</p>
+        <p>📞 Auto dialing emergency contact...</p>
+        <button onclick="closePopup('alert-popup')">Close</button>
+    </div>
+
+    <div id="silent-alarm-popup" class="popup">
+        <h3>Silent Alarm Activated</h3>
+        <p>✅ AI is listening – Say “Help” or your distress word to trigger.</p>
+        <p>📞 Fake Call Incoming – A call from “Mom” or “Boss” will ring in 3…2…1…</p>
+        <button onclick="closePopup('silent-alarm-popup')">Close</button>
+    </div>
+
+    <div id="safe-routes-popup" class="popup">
+        <h3>🗺️ Safe Routes</h3>
+        <input type="text" id="location-input" placeholder="Enter location">
+        <button onclick="generateRoute()">Get Safe Route</button>
+        <p id="route-result"></p>
+        <button onclick="closePopup('safe-routes-popup')">Close</button>
+    </div>
+
+    <div id="safety-reports-popup" class="popup">
+        <h3>🔍 Live Safety Reports</h3>
+        <input type="text" id="area-input" placeholder="Enter area">
+        <button onclick="generateReport()">Get Report</button>
+        <p id="report-result"></p>
+        <button onclick="closePopup('safety-reports-popup')">Close</button>
+    </div>
+
+    <div id="ai-escort-popup" class="popup">
+        <h3>🎤 AI Virtual Escort</h3>
+        <p>Enabling voice assistance… Please allow location & mic access.</p>
+        <button onclick="closePopup('ai-escort-popup')">Close</button>
+    </div>
+
+    <script>
+        function showPopup(id) {
+            document.getElementById(id).style.display = "block";
+            document.getElementById('overlay').style.display = "block";
+        }
+
+        function closePopup(id) {
+            document.getElementById(id).style.display = "none";
+            document.getElementById('overlay').style.display = "none";
+        }
+
+        function closeAllPopups() {
+            document.querySelectorAll('.popup').forEach(popup => popup.style.display = "none");
+            document.getElementById('overlay').style.display = "none";
+        }
+
+        function generateRoute() {
+            document.getElementById('route-result').innerText = "Take left in 200m, then right in 500m.";
+        }
+
+        function generateReport() {
+            document.getElementById('report-result').innerText = "🚨 Incident: Robbery reported nearby!";
+        }
+    </script>
 
 </body>
 </html>
